@@ -35,11 +35,19 @@ public class Main {
 
 
         //Удаление записи по id
-        CriteriaDelete<User> criteriaDelete = criteriaBuilder.createCriteriaDelete(User.class);
-        Root<User> root = criteriaDelete.from(User.class);
-        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), 15));
-        session.createQuery(criteriaDelete).executeUpdate();
+//        CriteriaDelete<User> criteriaDelete = criteriaBuilder.createCriteriaDelete(User.class);
+//        Root<User> root = criteriaDelete.from(User.class);
+//        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), 15));
+//        session.createQuery(criteriaDelete).executeUpdate();
 
+
+        //Обновление записи
+        CriteriaUpdate<User> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);
+        Root<User> root = criteriaUpdate.from(User.class);
+
+        criteriaUpdate.set("email", "123");
+        criteriaUpdate.where(criteriaBuilder.equal(root.get("id"), 15));
+        session.createQuery(criteriaUpdate).executeUpdate();
 
         session.getTransaction().commit();
         session.close();
