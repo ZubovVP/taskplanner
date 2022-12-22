@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="user_data", schema = "taskplanner", catalog = "task_planner")
 @Getter
@@ -26,4 +28,10 @@ public class User {
 
     @Column(name = "username", nullable = false)
     private String username;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Category> categories;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Priority> priorities;
 }

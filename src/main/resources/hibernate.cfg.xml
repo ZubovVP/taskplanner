@@ -14,6 +14,8 @@
 <!--        <property name="hibernate.format_sql">true</property>-->
         <property name="hibernate.highlight_sql">true</property>
         <mapping class="ru.zubov.entity.User"/>
+        <mapping class="ru.zubov.entity.Category"/>
+        <mapping class="ru.zubov.entity.Priority"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

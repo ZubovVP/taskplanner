@@ -2,6 +2,7 @@ package ru.zubov;
 
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
+import ru.zubov.entity.User;
 import ru.zubov.utils.HibernateUtil;
 
 
@@ -15,6 +16,10 @@ public class Main {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.getTransaction().begin();
+
+        User user = session.get(User.class, 21);
+        System.out.println(user.getEmail());
+        System.out.println(user.getPriorities());
 
 
         session.getTransaction().commit();
