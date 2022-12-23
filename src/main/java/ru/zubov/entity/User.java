@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name="user_data", schema = "taskplanner", catalog = "task_planner")
+@Table(name = "user_data", schema = "taskplanner", catalog = "task_planner")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -34,4 +34,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Priority> priorities;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Activity activity;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Stat stat;
 }
