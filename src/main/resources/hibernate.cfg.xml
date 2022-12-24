@@ -18,6 +18,7 @@
         <mapping class="ru.zubov.entity.Priority"/>
         <mapping class="ru.zubov.entity.Activity"/>
         <mapping class="ru.zubov.entity.Stat"/>
+        <mapping class="ru.zubov.entity.Role"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
