@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "stat", schema = "taskplanner", catalog = "task_planner")
+@Table(name = "stat")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

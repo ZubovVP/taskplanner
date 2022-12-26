@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user_data", schema = "taskplanner", catalog = "task_planner")
+@Table(name = "user_data")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,10 +38,9 @@ public class User {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Stat stat;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude @ToString.Exclude
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+@ManyToMany(fetch = FetchType.LAZY)
+@JoinTable(name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 }

@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "role_data", schema = "taskplanner", catalog = "task_planner")
+@Table(name = "role_data")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,6 +18,6 @@ public class Role {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private List<User> users;
 }
