@@ -2,6 +2,7 @@ package ru.zubov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +13,8 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

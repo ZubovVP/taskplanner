@@ -15,18 +15,16 @@ public class Main {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.getTransaction().begin();
-
-//        Role role = session.get(Role.class, 1);
-
-        User user = session.get(User.class, 24);
-        System.out.println(user.getEmail());
-        System.out.println(user.getPriorities());
-        System.out.println(user.getRoles());
-
-
-        session.getTransaction().commit();
+        User user1 = session.get(User.class, 24);
+        log.info(user1);
         session.close();
+
+        session = HibernateUtil.getSessionFactory().openSession();
+        User user2 = session.get(User.class, 24);
+        log.info(user2);
+        session.close();
+
+
         HibernateUtil.close();
     }
 }

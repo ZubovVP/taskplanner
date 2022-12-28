@@ -24,6 +24,10 @@ dependencies {
     //JDBC
     implementation 'org.postgresql:postgresql:42.5.1'
 
+    //Cache 2 level
+    implementation 'org.hibernate.orm:hibernate-jcache:6.1.6.Final' //реализация API
+    implementation 'org.ehcache:ehcache:3.10.6'                     //API из JSR
+
     //Log4j
     implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
     implementation 'org.apache.logging.log4j:log4j-api:2.19.0'

@@ -5,15 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.Objects;
 
 @Entity
+@Table(name="category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name="category")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
