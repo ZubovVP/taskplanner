@@ -9,36 +9,32 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    //Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    //Test
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
-
-    //Hibernate
-    implementation 'org.hibernate:hibernate-core:6.1.6.Final'
-
-    //JDBC
-    implementation 'org.postgresql:postgresql:42.5.1'
-
-    //Cache 2 level
-    implementation 'org.hibernate.orm:hibernate-jcache:6.1.6.Final' //реализация API
-    implementation 'org.ehcache:ehcache:3.10.6'                     //API из JSR
-
-    //Log4j
-    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
-    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
-}
-
+// кодировка при компиляции классов (чтобы все русские символы из комментариев корректно отображались)
 compileJava.options.encoding = 'UTF-8'
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-test {
-    useJUnitPlatform()
+
+
+dependencies {
+
+    // ядро Hibernate
+    implementation 'org.hibernate:hibernate-core-jakarta:5.5.6.Final'
+
+    // JDBC драйвер
+    implementation 'org.postgresql:postgresql:42.2.23'
+
+    // логирование
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+
+    // кеширование 2го уровня
+    implementation 'org.hibernate:hibernate-jcache:5.5.6.Final' // реализация API
+    implementation 'org.ehcache:ehcache:3.9.5' // API из JSR
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }

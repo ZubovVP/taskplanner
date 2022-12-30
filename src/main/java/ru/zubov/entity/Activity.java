@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import java.util.Objects;
 
@@ -24,8 +25,7 @@ public class Activity {
     private Long id;
 
     @Column(name = "activatied", nullable = false)
-    @Basic
-    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
+    @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
     private boolean activatied;
 
     @OneToOne
