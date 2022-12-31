@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Stat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
