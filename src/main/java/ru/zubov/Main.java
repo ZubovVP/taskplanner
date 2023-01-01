@@ -22,7 +22,13 @@ public class Main {
         log.info(user2);
         session.close();
 
-
+        //Добавление статистики по использованию L2C
+        log.info("hit " + HibernateUtil.getSessionFactory().getStatistics().getSecondLevelCacheHitCount());
+        log.info("miss " + HibernateUtil.getSessionFactory().getStatistics().getSecondLevelCacheMissCount());
+        log.info("put " + HibernateUtil.getSessionFactory().getStatistics().getSecondLevelCachePutCount());
+        for (String s : HibernateUtil.getSessionFactory().getStatistics().getSecondLevelCacheRegionNames()) {
+            log.info(s);
+        }
         HibernateUtil.close();
     }
 }

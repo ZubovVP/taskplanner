@@ -13,6 +13,7 @@
         <property name="connection.password">rootroot</property>
         <property name="hibernate.default_schema">taskplanner</property>
         <property name="hibernate.default_catalog">task_planner</property>
+        <property name="hibernate.generate_statistics">true</property>
         <!--        <property name="hibernate.show_sql">true</property>-->
         <!--        <property name="hibernate.format_sql">true</property>-->
         <!--        <property name="hibernate.highlight_sql">true</property>-->
