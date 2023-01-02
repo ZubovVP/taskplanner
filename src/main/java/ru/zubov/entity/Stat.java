@@ -31,6 +31,7 @@ public class Stat {
     private Long uncompletedTotal;
 
     @OneToOne
+    @MapsId     //используется для ленивой загрузки для связи @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

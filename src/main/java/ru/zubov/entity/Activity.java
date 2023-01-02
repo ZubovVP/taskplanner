@@ -29,6 +29,7 @@ public class Activity {
     private boolean activatied;
 
     @OneToOne
+    @MapsId     //используется для ленивой загрузки для связи @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

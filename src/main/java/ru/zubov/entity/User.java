@@ -1,11 +1,15 @@
 package ru.zubov.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_data")
@@ -18,7 +22,6 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "email", nullable = false, length = 20)
@@ -36,17 +39,19 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Priority> priorities;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    // optional = false - используется для указание ленивой загрузки для связи one to one
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
     private Activity activity;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    // optional = false - используется для указание ленивой загрузки для связи one to one
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
     private Stat stat;
 
 @ManyToMany(fetch = FetchType.LAZY)
 @JoinTable(name = "user_role",
         joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
