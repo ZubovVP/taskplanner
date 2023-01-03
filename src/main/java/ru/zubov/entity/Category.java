@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +35,9 @@ public class Category {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private List<Task> tasks;
 
     @Override
     public boolean equals(Object o) {

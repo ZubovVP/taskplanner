@@ -47,11 +47,14 @@ public class User {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
     private Stat stat;
 
-@ManyToMany(fetch = FetchType.LAZY)
-@JoinTable(name = "user_role",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Task> tasks;
 
     @Override
     public boolean equals(Object o) {

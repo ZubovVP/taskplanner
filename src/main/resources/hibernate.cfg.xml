@@ -28,6 +28,8 @@
         <mapping class="ru.zubov.entity.Activity"/>
         <mapping class="ru.zubov.entity.Stat"/>
         <mapping class="ru.zubov.entity.Role"/>
+        <mapping class="ru.zubov.entity.Task"/>
+
 
 
         <!-- DB schema will be updated if needed -->

@@ -6,42 +6,55 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name="priority")
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "task")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class Priority {
+public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "color")
-    private String color;
+    @Column(name = "completed")
+    @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
+    // 1 = true, 0 = false
+    private Boolean completed;
 
-    @ManyToOne
+    @Column(name = "task_date")
+    private LocalDate createDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "priority", fetch = FetchType.LAZY)
-    private List<Task> tasks;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "priority_id", referencedColumnName = "id")
+    private Priority priority;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Priority priority = (Priority) o;
-        return id.equals(priority.id);
+        Task task = (Task) o;
+        return Objects.equals(id, task.id);
     }
 
     @Override

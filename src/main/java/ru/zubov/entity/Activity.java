@@ -26,7 +26,7 @@ public class Activity {
 
     @Column(name = "activatied", nullable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
-    private boolean activatied;
+    private Boolean activatied;
 
     @OneToOne
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
