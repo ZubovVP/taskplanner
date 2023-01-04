@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -33,28 +34,28 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Category> categories;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Priority> priorities;
+    // optional = false - используется для указание ленивой загрузки для связи one to one
+//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+//    private Activity activity;
 
     // optional = false - используется для указание ленивой загрузки для связи one to one
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-    private Activity activity;
+//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+//    private Stat stat;
 
-    // optional = false - используется для указание ленивой загрузки для связи one to one
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-    private Stat stat;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Task> tasks;
+    //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Category> categories;
+//
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Priority> priorities;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Task> tasks;
 
     @Override
     public boolean equals(Object o) {

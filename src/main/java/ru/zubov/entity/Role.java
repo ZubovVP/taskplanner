@@ -25,8 +25,8 @@ public class Role {
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<User> users;
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    private Set<User> users;
 
     @Override
     public boolean equals(Object o) {
