@@ -6,12 +6,14 @@ import org.hibernate.query.Query;
 import ru.zubov.entity.User;
 import ru.zubov.utils.HibernateUtil;
 
-public class UserDaoCriteria implements Crud<User> {
+import java.util.List;
+
+public class UserDaoCriteria implements CommonDao<User> {
 
     @Override
     public User add(User elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        session.beginTransaction();
         session.persist(elem);
         session.getTransaction().commit();
         session.close();
@@ -21,7 +23,7 @@ public class UserDaoCriteria implements Crud<User> {
     @Override
     public boolean update(User elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaUpdate<User> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);
         Root<User> root = criteriaUpdate.from(User.class);
@@ -38,24 +40,25 @@ public class UserDaoCriteria implements Crud<User> {
     @Override
     public User get(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
-        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.gt(root.get("id"), id)));
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.equal(root.get("id"), id)));
         //Для добавление нескольких параметров
         //        criteriaQuery.select(root).where(criteriaBuilder.and(p1, p2));
         Query query = session.createQuery(criteriaQuery);
         session.getTransaction().commit();
+        User user = (User) query.getResultList().get(0);
         session.close();
-        return (User) query.getResultList().get(0);
+        return user;
     }
 
     @Override
     public void delete(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.getTransaction().begin();
+        session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaDelete<User> criteriaDelete = criteriaBuilder.createCriteriaDelete(User.class);
         Root<User> root = criteriaDelete.from(User.class);
@@ -63,5 +66,36 @@ public class UserDaoCriteria implements Crud<User> {
         session.createQuery(criteriaDelete).executeUpdate();
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<User> findAll() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        Query query = session.createQuery(criteriaQuery);
+        session.getTransaction().commit();
+        List<User> users = (List<User>) query.getResultList();
+        session.close();
+        return users;
+    }
+
+    @Override
+    public List<User> findAll(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.equal(root.get("email"), email)));
+        Query query = session.createQuery(criteriaQuery);
+        session.getTransaction().commit();
+        List<User> users = (List<User>) query.getResultList();
+        session.close();
+        return users;
     }
 }
