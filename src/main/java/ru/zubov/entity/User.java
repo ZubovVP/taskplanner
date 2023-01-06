@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,10 +41,7 @@ public class User {
 //    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
 //    private Stat stat;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
