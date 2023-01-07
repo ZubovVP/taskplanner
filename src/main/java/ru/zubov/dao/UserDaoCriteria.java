@@ -28,8 +28,8 @@ public class UserDaoCriteria implements CommonDao<User> {
         CriteriaUpdate<User> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);
         Root<User> root = criteriaUpdate.from(User.class);
         criteriaUpdate.set("email", elem.getEmail());
-        criteriaUpdate.set("user_password", elem.getPassword());
         criteriaUpdate.set("username", elem.getUsername());
+        criteriaUpdate.set("password", elem.getPassword());
         criteriaUpdate.where(criteriaBuilder.equal(root.get("id"), elem.getId()));
         int changes = session.createQuery(criteriaUpdate).executeUpdate();
         session.getTransaction().commit();
@@ -91,7 +91,7 @@ public class UserDaoCriteria implements CommonDao<User> {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
-        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.equal(root.get("email"), email)));
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.like(root.get("email"), "%" + email + "%")));
         Query query = session.createQuery(criteriaQuery);
         session.getTransaction().commit();
         List<User> users = (List<User>) query.getResultList();

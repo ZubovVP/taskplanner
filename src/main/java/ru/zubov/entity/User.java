@@ -19,15 +19,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class User extends EntityAbstract{
     @Column(name = "email", nullable = false, length = 20)
     private String email;
 
-    @Column(name = "user_password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "username", nullable = false)
@@ -58,12 +54,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id);
+        return this.getId().equals(user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
 
     @Override

@@ -1,8 +1,7 @@
 package ru.zubov;
 
 import lombok.extern.log4j.Log4j2;
-import ru.zubov.dao.CommonDao;
-import ru.zubov.dao.UserHqlDao;
+import ru.zubov.dao.*;
 import ru.zubov.entity.User;
 import ru.zubov.utils.HibernateUtil;
 
@@ -12,16 +11,23 @@ public class Main {
     public static void main(String[] args) {
         log.info("Start Hibernate method!");
 
-//        CommonDao<User> crud = new UserHqlDao();
+        CommonDao<User> crud = new UserDaoCriteria();
 //        User user = new User();
-////        user.setId(26L);
-//        user.setUsername("Test_3");
+//        user.setId(27L);
+//        user.setUsername("Test_4");
 //        user.setPassword("111");
-//        user.setEmail("3@mail.com");
-//        crud.add(user);
+//        user.setEmail("4@mail.com");
+//        crud.update(user);
+
+        log.info(crud.findAll("mail"));
+
 
         CommonDao<User> crud2 = new UserHqlDao();
-        log.info(crud2.get(27L));
+        log.info(crud2.findAll("mail"));
+
+
+        TaskDao taskDao = new TaskDaoImpl();
+        log.info(taskDao.find(true, "1111@mail.com"));
 
         //Добавление статистики по использованию L2C
         log.info("hit " + HibernateUtil.getSessionFactory().getStatistics().getSecondLevelCacheHitCount());

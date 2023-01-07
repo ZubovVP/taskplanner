@@ -2,14 +2,15 @@ package ru.zubov.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.zubov.entity.User;
+import ru.zubov.entity.Task;
 import ru.zubov.utils.HibernateUtil;
 
 import java.util.List;
 
-public class UserHqlDao implements CommonDao<User> {
+public class TaskDaoImpl implements TaskDao {
+
     @Override
-    public User add(User elem) {
+    public Task add(Task elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.persist(elem);
@@ -19,7 +20,7 @@ public class UserHqlDao implements CommonDao<User> {
     }
 
     @Override
-    public boolean update(User elem) {
+    public boolean update(Task elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.merge(elem);
@@ -29,10 +30,10 @@ public class UserHqlDao implements CommonDao<User> {
     }
 
     @Override
-    public User get(Long id) {
+    public Task get(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        User result = session.get(User.class, id);
+        Task result = session.get(Task.class, id);
         session.close();
         return result;
     }
@@ -41,31 +42,43 @@ public class UserHqlDao implements CommonDao<User> {
     public void delete(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        User user = new User();
-        user.setId(id);
-        session.remove(user);
+        Task task = new Task();
+        task.setId(id);
+        session.remove(task);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<User> findAll() {
+    public List<Task> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM User");
-        List<User> users = query.getResultList();
+        Query query = session.createQuery("FROM Task");
+        List<Task> tasks = query.getResultList();
         session.close();
-        return users;
+        return tasks;
     }
 
     @Override
-    public List<User> findAll(String email) {
+    public List<Task> findAll(String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM User where email like :email");
+        Query query = session.createQuery("FROM Task t where t.user.email like :email");
         query.setParameter("email", "%" + email + "%");
-        List<User> users = query.getResultList();
+        List<Task> tasks = query.getResultList();
         session.close();
-        return users;
+        return tasks;
+    }
+
+    @Override
+    public List<Task> find(boolean completed, String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM Task t where t.user.email like :email and t.completed = :completed");
+        query.setParameter("email", "%" + email + "%");
+        query.setParameter("completed", completed);
+        List<Task> tasks = query.getResultList();
+        session.close();
+        return tasks;
     }
 }
