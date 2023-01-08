@@ -1,13 +1,15 @@
-package ru.zubov.dao;
+package ru.zubov.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import ru.zubov.dao.interfaces.CrudDao;
+import ru.zubov.dao.interfaces.objects.TaskDao;
 import ru.zubov.entity.Task;
 import ru.zubov.utils.HibernateUtil;
 
 import java.util.List;
 
-public class TaskDaoImpl implements TaskDao {
+public class TaskDaoImpl implements TaskDao, CrudDao<Task> {
 
     @Override
     public Task add(Task elem) {

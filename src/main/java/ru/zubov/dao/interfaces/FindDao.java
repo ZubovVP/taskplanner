@@ -1,8 +1,8 @@
-package ru.zubov.dao;
+package ru.zubov.dao.interfaces;
 
 import java.util.List;
 
-public interface CommonDao<T> extends Crud<T> {
+public interface FindDao<T> {
     List<T> findAll();
 
     List<T> findAll(String email);

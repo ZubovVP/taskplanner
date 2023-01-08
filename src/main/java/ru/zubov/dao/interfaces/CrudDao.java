@@ -1,6 +1,6 @@
-package ru.zubov.dao;
+package ru.zubov.dao.interfaces;
 
-public interface Crud<T> {
+public interface CrudDao<T> {
 
     T add(T elem);
 

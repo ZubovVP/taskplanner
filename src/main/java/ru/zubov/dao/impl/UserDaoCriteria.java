@@ -1,14 +1,16 @@
-package ru.zubov.dao;
+package ru.zubov.dao.impl;
 
 import jakarta.persistence.criteria.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import ru.zubov.dao.interfaces.CrudDao;
+import ru.zubov.dao.interfaces.FindDao;
 import ru.zubov.entity.User;
 import ru.zubov.utils.HibernateUtil;
 
 import java.util.List;
 
-public class UserDaoCriteria implements CommonDao<User> {
+public class UserDaoCriteria implements FindDao<User>, CrudDao<User> {
 
     @Override
     public User add(User elem) {

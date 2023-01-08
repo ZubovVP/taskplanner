@@ -32,9 +32,9 @@ public class Category {
     @Column(name = "uncompleted_count", updatable = false)
     private Long uncompletedCount;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Task> tasks;

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,8 +41,8 @@ public class User extends EntityAbstract{
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Category> categories;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Category> categories;
 //
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Priority> priorities;
