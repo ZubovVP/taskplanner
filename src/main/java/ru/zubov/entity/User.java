@@ -30,9 +30,9 @@ public class User extends EntityAbstract{
     @Column(name = "username", nullable = false)
     private String username;
 
-    // optional = false - используется для указание ленивой загрузки для связи one to one
-//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-//    private Activity activity;
+//     optional = false - используется для указание ленивой загрузки для связи one to one
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+    private Activity activity;
 
     // optional = false - используется для указание ленивой загрузки для связи one to one
 //    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
