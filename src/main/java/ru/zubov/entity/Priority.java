@@ -29,9 +29,9 @@ public class Priority {
     @Column(name = "color")
     private String color;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToMany(mappedBy = "priority", fetch = FetchType.LAZY)
     private List<Task> tasks;

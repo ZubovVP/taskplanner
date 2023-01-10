@@ -2,16 +2,15 @@ package ru.zubov.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.zubov.dao.interfaces.objects.TaskDao;
-import ru.zubov.entity.Task;
+import ru.zubov.dao.interfaces.objects.PriorityDao;
+import ru.zubov.entity.Priority;
 import ru.zubov.utils.HibernateUtil;
 
 import java.util.List;
 
-public class TaskDaoImpl implements TaskDao {
-
+public class PriorityDaoImpl implements PriorityDao {
     @Override
-    public Task add(Task elem) {
+    public Priority add(Priority elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.persist(elem);
@@ -21,7 +20,7 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public boolean update(Task elem) {
+    public boolean update(Priority elem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.merge(elem);
@@ -31,10 +30,10 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public Task get(Long id) {
+    public Priority get(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Task result = session.get(Task.class, id);
+        Priority result = session.get(Priority.class, id);
         session.close();
         return result;
     }
@@ -43,43 +42,31 @@ public class TaskDaoImpl implements TaskDao {
     public void delete(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Task task = new Task();
-        task.setId(id);
-        session.remove(task);
+        Priority Priority = new Priority();
+        Priority.setId(id);
+        session.remove(Priority);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<Task> findAll() {
+    public List<Priority> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Task");
-        List<Task> tasks = query.getResultList();
+        Query<Priority> query = session.createQuery("FROM Priority");
+        List<Priority> priorities = query.getResultList();
         session.close();
-        return tasks;
+        return priorities;
     }
 
     @Override
-    public List<Task> findAll(String email) {
+    public List<Priority> findAll(String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Task t where t.user.email like :email");
+        Query<Priority> query = session.createQuery("FROM Priority p where p.user.email like :email");
         query.setParameter("email", "%" + email + "%");
-        List<Task> tasks = query.getResultList();
+        List<Priority> priorities = query.getResultList();
         session.close();
-        return tasks;
-    }
-
-    @Override
-    public List<Task> find(boolean completed, String email) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("FROM Task t where t.user.email like :email and t.completed = :completed");
-        query.setParameter("email", "%" + email + "%");
-        query.setParameter("completed", completed);
-        List<Task> tasks = query.getResultList();
-        session.close();
-        return tasks;
+        return priorities;
     }
 }

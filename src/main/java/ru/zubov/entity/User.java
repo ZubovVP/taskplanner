@@ -35,17 +35,17 @@ public class User extends EntityAbstract{
     private Activity activity;
 
     // optional = false - используется для указание ленивой загрузки для связи one to one
-//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-//    private Stat stat;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+    private Stat stat;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Category> categories;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Priority> priorities;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Priority> priorities;
 
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Task> tasks;
