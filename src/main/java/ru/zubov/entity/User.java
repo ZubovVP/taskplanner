@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class User extends EntityAbstract{
+public class User extends EntityAbstract {
     @Column(name = "email", nullable = false, length = 20)
     private String email;
 
@@ -30,22 +29,22 @@ public class User extends EntityAbstract{
     @Column(name = "username", nullable = false)
     private String username;
 
-//     optional = false - используется для указание ленивой загрузки для связи one to one
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-    private Activity activity;
+    //     optional = false - используется для указание ленивой загрузки для связи one to one
+//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+//    private Activity activity;
 
-    // optional = false - используется для указание ленивой загрузки для связи one to one
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
-    private Stat stat;
+//    // optional = false - используется для указание ленивой загрузки для связи one to one
+//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+//    private Stat stat;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Category> categories;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Priority> priorities;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Category> categories;
+//
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Priority> priorities;
 
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Task> tasks;

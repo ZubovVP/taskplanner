@@ -28,7 +28,7 @@ public class Activity {
     @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
     private Boolean activatied;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
