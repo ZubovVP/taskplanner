@@ -13,6 +13,7 @@
         <property name="connection.password">rootroot</property>
         <property name="hibernate.default_schema">taskplanner</property>
         <property name="hibernate.default_catalog">task_planner</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
         <property name="hibernate.generate_statistics">true</property>
         <!--        <property name="hibernate.show_sql">true</property>-->
         <!--        <property name="hibernate.format_sql">true</property>-->
@@ -20,8 +21,6 @@
         <!--        <property name="hibernate.use_sql_comments">true</property>-->
         <!--        <property name="hibernate.hibernate.session.events.log">true</property>-->
 
-
-        <property name="hibernate.highlight_sql">true</property>
         <mapping class="ru.zubov.entity.User"/>
         <mapping class="ru.zubov.entity.Category"/>
         <mapping class="ru.zubov.entity.Priority"/>
