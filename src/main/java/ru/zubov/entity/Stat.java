@@ -47,4 +47,12 @@ public class Stat {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Stat{" +
+                "completedTotal=" + completedTotal +
+                ", uncompletedTotal=" + uncompletedTotal +
+                '}';
+    }
 }
