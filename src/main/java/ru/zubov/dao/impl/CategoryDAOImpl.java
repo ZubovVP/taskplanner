@@ -43,9 +43,9 @@ public class CategoryDAOImpl implements CategoryDao {
     public void delete(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Category task = new Category();
-        task.setId(id);
-        session.remove(task);
+        Category category = new Category();
+        category.setId(id);
+        session.remove(category);
         session.getTransaction().commit();
         session.close();
     }
@@ -54,10 +54,10 @@ public class CategoryDAOImpl implements CategoryDao {
     public List<Category> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Category");
-        List<Category> tasks = query.getResultList();
+        Query<Category> query = session.createQuery("FROM Category");
+        List<Category> categories = query.getResultList();
         session.close();
-        return tasks;
+        return categories;
     }
 
     @Override

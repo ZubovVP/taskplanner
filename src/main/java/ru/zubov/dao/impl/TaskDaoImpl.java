@@ -75,7 +75,7 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> find(boolean completed, String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM Task t where t.user.email like :email and t.completed = :completed");
+        Query<Task> query = session.createQuery("FROM Task t where t.user.email like :email and t.completed = :completed");
         query.setParameter("email", "%" + email + "%");
         query.setParameter("completed", completed);
         List<Task> tasks = query.getResultList();

@@ -3,14 +3,13 @@ package ru.zubov.dao.impl;
 import jakarta.persistence.criteria.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import ru.zubov.dao.interfaces.CrudDao;
-import ru.zubov.dao.interfaces.FindDao;
+import ru.zubov.dao.interfaces.objects.UserDao;
 import ru.zubov.entity.User;
 import ru.zubov.utils.HibernateUtil;
 
 import java.util.List;
 
-public class UserDaoCriteria implements FindDao<User>, CrudDao<User> {
+public class UserDaoCriteria implements UserDao {
 
     @Override
     public User add(User elem) {
@@ -78,9 +77,9 @@ public class UserDaoCriteria implements FindDao<User>, CrudDao<User> {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
-        Query query = session.createQuery(criteriaQuery);
+        Query<User> query = session.createQuery(criteriaQuery);
         session.getTransaction().commit();
-        List<User> users = (List<User>) query.getResultList();
+        List<User> users = query.getResultList();
         session.close();
         return users;
     }
@@ -94,10 +93,26 @@ public class UserDaoCriteria implements FindDao<User>, CrudDao<User> {
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
         criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.like(root.get("email"), "%" + email + "%")));
-        Query query = session.createQuery(criteriaQuery);
+        Query<User> query = session.createQuery(criteriaQuery);
         session.getTransaction().commit();
-        List<User> users = (List<User>) query.getResultList();
+        List<User> users = query.getResultList();
         session.close();
         return users;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.select(root).where(criteriaBuilder.and(criteriaBuilder.equal(root.get("email"), email)));
+        Query<User> query = session.createQuery(criteriaQuery);
+        session.getTransaction().commit();
+        User user = query.uniqueResult();
+        session.close();
+        return user;
     }
 }
