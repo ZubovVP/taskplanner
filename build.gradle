@@ -1,9 +1,17 @@
 plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 group 'ru.zubov'
 version '1.0-SNAPSHOT'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,22 +27,37 @@ tasks.withType(JavaCompile) {
 
 
 dependencies {
+    // стартеры SpringBoot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    // ядро Hibernate
-    implementation 'org.hibernate:hibernate-core-jakarta:5.5.6.Final'
+    // только для разработки (в боевом приложении его не будет)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // JDBC драйвер
-    implementation 'org.postgresql:postgresql:42.2.23'
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
 
-    // логирование
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    // драйвер БД
+    runtimeOnly 'org.postgresql:postgresql'
 
-    // кеширование 2го уровня
-    implementation 'org.hibernate:hibernate-jcache:5.5.6.Final' // реализация API
-    implementation 'org.ehcache:ehcache:3.9.5' // API из JSR
 
-    // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+//    // ядро Hibernate
+//    implementation 'org.hibernate:hibernate-core-jakarta:5.5.6.Final'
+//
+//    // JDBC драйвер
+//    implementation 'org.postgresql:postgresql:42.2.23'
+//
+//    // логирование
+//    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+//    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+//
+//    // кеширование 2го уровня
+//    implementation 'org.hibernate:hibernate-jcache:5.5.6.Final' // реализация API
+//    implementation 'org.ehcache:ehcache:3.9.5' // API из JSR
+//
+//    // Lombok
+//    compileOnly 'org.projectlombok:lombok:1.18.20'
+//    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
