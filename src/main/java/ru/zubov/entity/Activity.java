@@ -1,13 +1,12 @@
 package ru.zubov.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -25,7 +24,7 @@ public class Activity {
     private Long id;
 
     @Column(name = "activatied", nullable = false)
-    @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class) // для автоматической конвертации числа в true/false
     private Boolean activatied;
 
     @OneToOne(fetch = FetchType.LAZY)

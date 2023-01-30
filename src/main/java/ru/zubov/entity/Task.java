@@ -1,13 +1,12 @@
 package ru.zubov.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -30,7 +29,7 @@ public class Task {
     private String title;
 
     @Column(name = "completed")
-    @Type(type = "org.hibernate.type.NumericBooleanType") // для автоматической конвертации числа в true/false
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class) // для автоматической конвертации числа в true/false
     // 1 = true, 0 = false
     private Boolean completed;
 
