@@ -1,12 +1,11 @@
 package ru.zubov.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.zubov.entity.Category;
 import ru.zubov.service.CategoryService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -17,5 +16,10 @@ public class CategoryController {
     @GetMapping("/findById")
     public Category findById(@RequestParam("id") Long id) {
         return categoryService.findById(id).orElse(null);
+    }
+
+    @PostMapping("/all")
+    public List<Category> findById(@RequestBody String email) {
+        return categoryService.findAll(email);
     }
 }
