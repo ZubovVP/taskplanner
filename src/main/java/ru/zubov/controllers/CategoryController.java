@@ -19,7 +19,7 @@ public class CategoryController {
     }
 
     @PostMapping("/all")
-    public List<Category> findById(@RequestBody String email) {
+    public List<Category> findById(@RequestParam String email) {
         return categoryService.findAll(email);
     }
 }
