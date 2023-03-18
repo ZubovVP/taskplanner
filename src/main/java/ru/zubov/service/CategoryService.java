@@ -13,6 +13,10 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
+    public Category add(Category category) {
+        return categoryRepository.save(category);
+    }
+
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
