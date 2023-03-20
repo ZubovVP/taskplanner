@@ -38,6 +38,12 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.add(category));
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity delete (@RequestParam("id") Long id){
+        categoryService.delete(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @PutMapping("/update")
     public ResponseEntity update(@RequestBody Category category) {
         if (category.getId() == null && category.getId() == 0) {
