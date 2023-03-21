@@ -1,6 +1,5 @@
 package ru.zubov.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +31,6 @@ public class Category {
     @Column(name = "uncompleted_count", updatable = false)
     private Long uncompletedCount;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

@@ -1,6 +1,7 @@
 package ru.zubov.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,16 +32,21 @@ public class CategoryController {
             return new ResponseEntity("id param must be NULL", HttpStatus.NOT_ACCEPTABLE);
         }
 
-        if (category.getTitle() == null && category.getTitle().trim().length() == 0) {
+        if (category.getTitle() == null || category.getTitle().trim().length() == 0) {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
 
         }
         return ResponseEntity.ok(categoryService.add(category));
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity delete (@RequestParam("id") Long id){
-        categoryService.delete(id);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+        try {
+            categoryService.delete(id);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            return new ResponseEntity("id " + id + " not found", HttpStatus.NOT_ACCEPTABLE);
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 
