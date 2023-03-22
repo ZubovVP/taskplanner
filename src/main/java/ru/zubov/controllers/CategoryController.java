@@ -63,4 +63,10 @@ public class CategoryController {
         categoryService.update(category);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Category>> search(@RequestParam("title") String title, @RequestParam("email") String email) {
+        List<Category> list = categoryService.findByTitle(title, email);
+        return ResponseEntity.ok(list);
+    }
 }

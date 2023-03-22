@@ -21,7 +21,7 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public void delete (Long id){
+    public void delete(Long id) {
         Category category = new Category();
         category.setId(id);
         categoryRepository.delete(category);
@@ -33,5 +33,9 @@ public class CategoryService {
 
     public List<Category> findAll(String email) {
         return categoryRepository.findByUserEmailOrderByTitleAsc(email);
+    }
+
+    public List<Category> findByTitle(String title, String email) {
+        return categoryRepository.findByTitle(title, email);
     }
 }
