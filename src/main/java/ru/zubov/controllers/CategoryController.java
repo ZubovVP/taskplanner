@@ -6,9 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.zubov.entity.Category;
+import ru.zubov.mapper.CategorySearchValues;
 import ru.zubov.service.CategoryService;
 
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @RestController
 @RequestMapping("/category")
@@ -58,15 +61,17 @@ public class CategoryController {
 
         if (category.getTitle() == null && category.getTitle().trim().length() == 0) {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
-
         }
         categoryService.update(category);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Category>> search(@RequestParam("title") String title, @RequestParam("email") String email) {
-        List<Category> list = categoryService.findByTitle(title, email);
+    public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues) {
+        if (isBlank(categorySearchValues.getEmail())) {
+            return new ResponseEntity("id param: email", HttpStatus.NOT_ACCEPTABLE);
+        }
+        List<Category> list = categoryService.findByTitle(categorySearchValues.getTitle(), categorySearchValues.getEmail());
         return ResponseEntity.ok(list);
     }
 }
