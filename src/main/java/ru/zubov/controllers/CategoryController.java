@@ -10,6 +10,7 @@ import ru.zubov.mapper.CategorySearchValues;
 import ru.zubov.service.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -18,11 +19,6 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
-
-    @GetMapping("/findById")
-    public Category findById(@RequestParam("id") Long id) {
-        return categoryService.findById(id).orElse(null);
-    }
 
     @PostMapping("/all")
     public List<Category> findById(@RequestBody String email) {
@@ -69,9 +65,17 @@ public class CategoryController {
     @GetMapping("/search")
     public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues) {
         if (isBlank(categorySearchValues.getEmail())) {
-            return new ResponseEntity("id param: email", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity("missed param: email", HttpStatus.NOT_ACCEPTABLE);
         }
         List<Category> list = categoryService.findByTitle(categorySearchValues.getTitle(), categorySearchValues.getEmail());
         return ResponseEntity.ok(list);
+    }
+    @GetMapping("/id")
+    public ResponseEntity<Category> search(@RequestBody Long id) {
+        if (id == null) {
+            return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
+        }
+        Optional<Category> category = categoryService.findById(id);
+        return category.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 }
