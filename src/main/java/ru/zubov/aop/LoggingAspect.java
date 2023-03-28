@@ -14,7 +14,7 @@ import org.springframework.util.StopWatch;
 public class LoggingAspect {
 
     //Аспект будет выполняться для всех методов из пакета контроллеров
-    @Around("execution(* ru.zubov.controllers..*(..)))")
+    @Around("execution(* ru.zubov.controller..*(..)))")
     public Object profileControllerMethods(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 

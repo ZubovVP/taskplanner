@@ -1,4 +1,4 @@
-package ru.zubov.controllers;
+package ru.zubov.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
