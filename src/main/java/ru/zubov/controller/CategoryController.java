@@ -71,7 +71,7 @@ public class CategoryController {
         return ResponseEntity.ok(list);
     }
     @GetMapping("/id")
-    public ResponseEntity<Category> search(@RequestBody Long id) {
+    public ResponseEntity<Category> search(@RequestParam Long id) {
         if (id == null) {
             return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
         }

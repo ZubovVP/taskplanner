@@ -31,24 +31,24 @@ public class User extends EntityAbstract {
     @Column(name = "username", nullable = false)
     private String username;
 
-    //     optional = false - используется для указание ленивой загрузки для связи one to one
-//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+////         optional = false - используется для указание ленивой загрузки для связи one to one
+//    @OneToOne(mappedBy = "user", optional = false)
 //    private Activity activity;
-
+//
 //    // optional = false - используется для указание ленивой загрузки для связи one to one
-//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, optional = false)
+//    @OneToOne(mappedBy = "user", optional = false)
 //    private Stat stat;
-
-//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+//
+//    @ManyToMany(mappedBy = "users")
 //    private Set<Role> roles = new HashSet<>();
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//
+//    @OneToMany(mappedBy = "user")
 //    private List<Category> categories;
 //
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "user")
 //    private List<Priority> priorities;
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//
+//    @OneToMany(mappedBy = "user")
 //    private List<Task> tasks;
 
     @Override
