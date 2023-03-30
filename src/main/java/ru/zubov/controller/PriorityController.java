@@ -33,7 +33,10 @@ public class PriorityController {
 
         if (priority.getTitle() == null || priority.getTitle().trim().length() == 0) {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
+        }
 
+        if (priority.getColor() == null || priority.getColor().trim().length() == 0) {
+            return new ResponseEntity("missed param : color", HttpStatus.NOT_ACCEPTABLE);
         }
         return ResponseEntity.ok(priorityService.add(priority));
     }
