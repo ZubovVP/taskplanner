@@ -1,5 +1,6 @@
 package ru.zubov.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.zubov.entity.Task;
@@ -9,6 +10,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TaskService {
     private final TaskRepository taskRepository;
 

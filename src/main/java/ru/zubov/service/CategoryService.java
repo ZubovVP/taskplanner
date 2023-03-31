@@ -1,5 +1,6 @@
 package ru.zubov.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.zubov.entity.Category;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
