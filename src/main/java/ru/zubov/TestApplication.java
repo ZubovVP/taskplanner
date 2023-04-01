@@ -63,7 +63,7 @@ public class TestApplication {
         newTask.setUser(user);
         newTask.setCategory(newCategory);
         newTask.setTitle("Новая задача");
-        newTask.setCreateDate(LocalDate.now());
+        newTask.setTaskDate(LocalDate.now());
         newTask.setPriority(newPriority);
         newTask.setCompleted(false);
         taskDao.add(newTask);

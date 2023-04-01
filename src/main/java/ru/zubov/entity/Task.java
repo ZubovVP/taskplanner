@@ -34,7 +34,7 @@ public class Task {
     private Boolean completed;
 
     @Column(name = "task_date")
-    private LocalDate createDate;
+    private LocalDate taskDate;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
