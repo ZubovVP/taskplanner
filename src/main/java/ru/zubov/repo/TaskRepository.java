@@ -16,6 +16,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.zubov.entity.Task;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -35,12 +36,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     )
         // искать по всем переданным параметрам (пустые параметры учитываться не будут)
     Page<Task> findByParams(@Param("title") String title,
-                            @Param("completed") Boolean completed,
+                            @Param("completed") Integer completed,
                             @Param("priorityId") Long priorityId,
                             @Param("categoryId") Long categoryId,
                             @Param("email") String email,
-                            @Param("dateFrom") Date dateFrom,
-                            @Param("dateTo") Date dateTo,
+                            @Param("dateFrom") LocalDateTime dateFrom,
+                            @Param("dateTo") LocalDateTime dateTo,
                             Pageable pageable
     );
 
