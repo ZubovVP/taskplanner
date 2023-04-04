@@ -1,5 +1,6 @@
 package ru.zubov.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class Stat {
     @Column(name = "uncompleted_total",updatable = false)
     private Long uncompletedTotal;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

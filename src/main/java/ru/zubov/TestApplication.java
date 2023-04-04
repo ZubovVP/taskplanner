@@ -10,7 +10,7 @@ import ru.zubov.dao.interfaces.objects.TaskDao;
 import ru.zubov.entity.*;
 import ru.zubov.utils.HibernateUtil;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Log4j2
 public class TestApplication {
@@ -63,7 +63,7 @@ public class TestApplication {
         newTask.setUser(user);
         newTask.setCategory(newCategory);
         newTask.setTitle("Новая задача");
-        newTask.setTaskDate(LocalDate.now());
+        newTask.setTaskDate(LocalDateTime.now());
         newTask.setPriority(newPriority);
         newTask.setCompleted(false);
         taskDao.add(newTask);
