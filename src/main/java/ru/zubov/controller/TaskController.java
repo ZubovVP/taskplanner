@@ -13,6 +13,7 @@ import ru.zubov.mapper.TaskSearchValues;
 import ru.zubov.service.TaskService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -37,6 +38,14 @@ public class TaskController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PostMapping("/all")
+    public ResponseEntity<List<Task>> findAll(@RequestBody String email) {
+        List<Task> result = taskService.findAll(email);
+
+        return ResponseEntity.ok(result);
+    }
+
 
     @PutMapping("/update")
     public ResponseEntity<Task> update(@RequestBody Task task) {
