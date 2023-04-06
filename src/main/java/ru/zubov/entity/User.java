@@ -1,5 +1,6 @@
 package ru.zubov.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_data")
@@ -31,7 +34,7 @@ public class User extends EntityAbstract {
     @Column(name = "username", nullable = false)
     private String username;
 
-////         optional = false - используется для указание ленивой загрузки для связи one to one
+    ////         optional = false - используется для указание ленивой загрузки для связи one to one
 //    @OneToOne(mappedBy = "user", optional = false)
 //    private Activity activity;
 //
@@ -39,8 +42,9 @@ public class User extends EntityAbstract {
 //    @OneToOne(mappedBy = "user", optional = false)
 //    private Stat stat;
 //
-//    @ManyToMany(mappedBy = "users")
-//    private Set<Role> roles = new HashSet<>();
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(mappedBy = "users")
+    private Set<Role> roles = new HashSet<>();
 //
 //    @OneToMany(mappedBy = "user")
 //    private List<Category> categories;

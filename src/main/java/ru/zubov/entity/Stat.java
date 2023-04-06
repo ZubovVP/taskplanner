@@ -1,6 +1,6 @@
 package ru.zubov.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public class Stat {
     private Long uncompletedTotal;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
