@@ -26,17 +26,16 @@ public class TaskController {
 
     @PutMapping("/add")
     public ResponseEntity<Task> add(@RequestBody Task task) {
-        if (task.getId() == null || task.getId() == 0) {
-            return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
+        if (task.getId() != null && task.getId() != 0) {
+            return new ResponseEntity("id param must be NULL", HttpStatus.NOT_ACCEPTABLE);
         }
 
         if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
             return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
         }
 
-        taskService.update(task);
+        return ResponseEntity.ok(taskService.add(task));
 
-        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/all")

@@ -23,6 +23,7 @@ import java.util.Set;
 public class User extends EntityAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "email", nullable = false, length = 20)
