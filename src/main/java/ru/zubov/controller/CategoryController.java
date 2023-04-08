@@ -33,8 +33,8 @@ public class CategoryController {
 
         if (category.getTitle() == null || category.getTitle().trim().length() == 0) {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
-
         }
+
         return ResponseEntity.ok(categoryService.add(category));
     }
 
