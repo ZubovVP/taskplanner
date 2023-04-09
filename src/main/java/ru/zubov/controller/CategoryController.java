@@ -62,6 +62,7 @@ public class CategoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    //todo
     @GetMapping("/search")
     public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues) {
         if (isBlank(categorySearchValues.getEmail())) {

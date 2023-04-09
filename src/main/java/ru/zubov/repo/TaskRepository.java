@@ -36,7 +36,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     )
         // искать по всем переданным параметрам (пустые параметры учитываться не будут)
     Page<Task> findByParams(@Param("title") String title,
-                            @Param("completed") Integer completed,
+                            @Param("completed") Boolean completed,
                             @Param("priorityId") Long priorityId,
                             @Param("categoryId") Long categoryId,
                             @Param("email") String email,

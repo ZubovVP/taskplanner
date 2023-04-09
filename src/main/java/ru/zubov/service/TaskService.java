@@ -38,7 +38,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public Page<Task> findByParams(String text, Integer completed, Long priorityId, Long categoryId, String email, LocalDateTime dateFrom, LocalDateTime dateTo, PageRequest paging) {
+    public Page<Task> findByParams(String text, Boolean completed, Long priorityId, Long categoryId, String email, LocalDateTime dateFrom, LocalDateTime dateTo, PageRequest paging) {
         return taskRepository.findByParams(text, completed, priorityId, categoryId, email, dateFrom, dateTo, paging);
     }
 }

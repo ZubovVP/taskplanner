@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    List<Role> findAllByUserEmailOrderById(String email);
+    List<Role> findAllByUsersEmailOrderById(String email);
 
 }

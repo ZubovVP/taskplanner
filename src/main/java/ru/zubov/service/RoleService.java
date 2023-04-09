@@ -18,7 +18,7 @@ public class RoleService {
     }
 
     public List<Role> findAll(String email) {
-        return repository.findAllByUserEmailOrderById(email);
+        return repository.findAllByUsersEmailOrderById(email);
     }
 
 }
