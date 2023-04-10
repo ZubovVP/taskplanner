@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<Category> findById(@RequestBody String email) {
         return categoryService.findAll(email);
     }
@@ -62,7 +62,6 @@ public class CategoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //todo
     @GetMapping("/search")
     public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues) {
         if (isBlank(categorySearchValues.getEmail())) {

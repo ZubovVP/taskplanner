@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class PriorityController {
     private final PriorityService priorityService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<Priority> findById(@RequestBody String email) {
         return priorityService.findAll(email);
     }

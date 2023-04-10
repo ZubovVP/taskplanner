@@ -38,7 +38,7 @@ public class TaskController {
 
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Task>> findAll(@RequestBody String email) {
         List<Task> result = taskService.findAll(email);
 
@@ -84,7 +84,7 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResponseEntity<Page<Task>> search(@RequestBody TaskSearchValues taskSearchValues) {
         // исключить NullPointerException
         String title = taskSearchValues.getTitle() != null ? taskSearchValues.getTitle() : null;
