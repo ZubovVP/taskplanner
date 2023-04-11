@@ -21,7 +21,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/all")
-    public List<Category> findById(@RequestBody String email) {
+    public List<Category> findById(@RequestParam("email") String email) {
         return categoryService.findAll(email);
     }
 
@@ -63,7 +63,7 @@ public class CategoryController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues) {
+    public ResponseEntity<List<Category>> search(@ModelAttribute CategorySearchValues categorySearchValues) {
         if (isBlank(categorySearchValues.getEmail())) {
             return new ResponseEntity("missed param: email", HttpStatus.NOT_ACCEPTABLE);
         }
