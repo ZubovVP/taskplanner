@@ -8,6 +8,7 @@ import ru.zubov.entity.Role;
 import ru.zubov.service.RoleService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -27,6 +28,10 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Role> search(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(roleService.findById(id).orElse(null));
+        if (id == null) {
+            return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
+        }
+        Optional<Role> role = roleService.findById(id);
+        return role.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

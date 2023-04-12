@@ -49,7 +49,7 @@ public class PriorityController {
             e.printStackTrace();
             return new ResponseEntity("id " + id + " not found", HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -62,7 +62,7 @@ public class PriorityController {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
         }
         priorityService.update(priority);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -80,6 +80,7 @@ public class PriorityController {
             return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
         }
         Optional<Priority> priority = priorityService.findById(id);
-        return priority.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+
+        return priority.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

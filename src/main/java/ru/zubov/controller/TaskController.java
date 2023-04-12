@@ -86,7 +86,6 @@ public class TaskController {
 
     @GetMapping("/search")
     public ResponseEntity<Page<Task>> search(@ModelAttribute TaskSearchValues taskSearchValues) {
-        // исключить NullPointerException
         String title = taskSearchValues.getTitle() != null ? taskSearchValues.getTitle() : null;
 
         // конвертируем Boolean в Integer

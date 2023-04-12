@@ -1,6 +1,7 @@
 package ru.zubov.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,10 @@ public class StatController {
 
     @GetMapping("/stat")
     public ResponseEntity<Stat> findByEmail(@RequestParam String email) {
-        return ResponseEntity.ok(statService.findStat(email));
+        if (email == null) {
+            return new ResponseEntity("missed param: String", HttpStatus.NOT_ACCEPTABLE);
+        }
+        Stat stat = statService.findStat(email);
+        return stat != null ? ResponseEntity.ok(statService.findStat(email)) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

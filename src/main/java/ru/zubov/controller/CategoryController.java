@@ -46,7 +46,7 @@ public class CategoryController {
             e.printStackTrace();
             return new ResponseEntity("id " + id + " not found", HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -59,7 +59,7 @@ public class CategoryController {
             return new ResponseEntity("missed param : title", HttpStatus.NOT_ACCEPTABLE);
         }
         categoryService.update(category);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -76,6 +76,6 @@ public class CategoryController {
             return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
         }
         Optional<Category> category = categoryService.findById(id);
-        return category.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+        return category.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
