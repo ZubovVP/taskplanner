@@ -25,13 +25,13 @@ public class TaskController {
 
 
     @PutMapping("/add")
-    public ResponseEntity<Task> add(@RequestBody Task task) {
+    public ResponseEntity<?> add(@RequestBody Task task) {
         if (task.getId() != null && task.getId() != 0) {
-            return new ResponseEntity("id param must be NULL", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("id param must be NULL", HttpStatus.NOT_ACCEPTABLE);
         }
 
         if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("missed param: title", HttpStatus.NOT_ACCEPTABLE);
         }
 
         return ResponseEntity.ok(taskService.add(task));
@@ -47,39 +47,39 @@ public class TaskController {
 
 
     @PutMapping("/update")
-    public ResponseEntity<Task> update(@RequestBody Task task) {
+    public ResponseEntity<?> update(@RequestBody Task task) {
         if (task.getId() == null || task.getId() == 0) {
-            return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("missed param: id", HttpStatus.NOT_ACCEPTABLE);
         }
 
         if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("missed param: title", HttpStatus.NOT_ACCEPTABLE);
         }
 
         taskService.update(task);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         try {
             taskService.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            return new ResponseEntity("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/id")
-    public ResponseEntity findById(@RequestParam Long id) {
+    public ResponseEntity<?> findById(@RequestParam Long id) {
         Task task;
         try {
             task = taskService.findById(id).orElse(null);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            return new ResponseEntity("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
         }
         return ResponseEntity.ok(task);
     }

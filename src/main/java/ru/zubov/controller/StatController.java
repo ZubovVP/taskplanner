@@ -15,9 +15,9 @@ public class StatController {
     private final StatService statService;
 
     @GetMapping("/stat")
-    public ResponseEntity<Stat> findByEmail(@RequestParam String email) {
+    public ResponseEntity<?> findByEmail(@RequestParam String email) {
         if (email == null) {
-            return new ResponseEntity("missed param: String", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("missed param: String", HttpStatus.NOT_ACCEPTABLE);
         }
         Stat stat = statService.findStat(email);
         return stat != null ? ResponseEntity.ok(statService.findStat(email)) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
