@@ -23,7 +23,6 @@ public class TaskController {
     private final TaskService taskService;
     public static final String ID_COLUMN = "id"; // имя столбца id
 
-
     @PutMapping("/add")
     public ResponseEntity<?> add(@RequestBody Task task) {
         if (task.getId() != null && task.getId() != 0) {
@@ -44,7 +43,6 @@ public class TaskController {
 
         return ResponseEntity.ok(result);
     }
-
 
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Task task) {
@@ -140,6 +138,5 @@ public class TaskController {
 
         // результат запроса
         return ResponseEntity.ok(result);
-
     }
 }

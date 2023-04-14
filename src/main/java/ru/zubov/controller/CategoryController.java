@@ -70,6 +70,7 @@ public class CategoryController {
         List<Category> list = categoryService.findByTitle(categorySearchValues.getTitle(), categorySearchValues.getEmail());
         return ResponseEntity.ok(list);
     }
+
     @GetMapping("/id")
     public ResponseEntity<?> search(@RequestParam Long id) {
         if (id == null) {

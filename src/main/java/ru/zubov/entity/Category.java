@@ -11,7 +11,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.util.Objects;
 
 @Entity
-@Table(name="category")
+@Table(name = "category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

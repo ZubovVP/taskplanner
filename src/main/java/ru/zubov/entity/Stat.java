@@ -28,7 +28,7 @@ public class Stat {
     private Long completedTotal;
 
 
-    @Column(name = "uncompleted_total",updatable = false)
+    @Column(name = "uncompleted_total", updatable = false)
     private Long uncompletedTotal;
 
     @OneToOne(fetch = FetchType.LAZY)

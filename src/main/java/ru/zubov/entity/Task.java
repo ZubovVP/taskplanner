@@ -30,7 +30,8 @@ public class Task {
     private String title;
 
     @Column(name = "completed")
-    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class) // для автоматической конвертации числа в true/false
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
+    // для автоматической конвертации числа в true/false
     // 1 = true, 0 = false
     private Boolean completed;
 

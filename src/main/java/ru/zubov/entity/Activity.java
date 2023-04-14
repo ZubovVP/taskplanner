@@ -24,7 +24,8 @@ public class Activity {
     private Long id;
 
     @Column(name = "activatied", nullable = false)
-    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class) // для автоматической конвертации числа в true/false
+    @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
+    // для автоматической конвертации числа в true/false
     private Boolean activatied;
 
     @OneToOne(fetch = FetchType.LAZY)
