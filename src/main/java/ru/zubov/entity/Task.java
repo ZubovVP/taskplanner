@@ -20,35 +20,34 @@ import java.util.Objects;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Task {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "completed")
+    @Column(name = "COMPLETED")
     @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
     // для автоматической конвертации числа в true/false
     // 1 = true, 0 = false
     private Boolean completed;
 
-    @Column(name = "task_date")
+    @Column(name = "TASK_DATE")
     private LocalDateTime taskDate;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")
     private Category category;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "priority_id", referencedColumnName = "id")
+    @JoinColumn(name = "PRIORITY_ID", referencedColumnName = "ID")
     private Priority priority;
 
     @Override

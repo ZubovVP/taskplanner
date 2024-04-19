@@ -23,16 +23,16 @@ import java.util.Set;
 public class User extends EntityAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "email", nullable = false, length = 20)
+    @Column(name = "EMAIL", nullable = false, length = 20)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "USERNAME", nullable = false)
     private String username;
 
     ////         optional = false - используется для указание ленивой загрузки для связи one to one

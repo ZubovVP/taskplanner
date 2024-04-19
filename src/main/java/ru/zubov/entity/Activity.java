@@ -20,20 +20,20 @@ import java.util.Objects;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "activatied", nullable = false)
+    @Column(name = "ACTIVATIED", nullable = false)
     @Convert(converter = org.hibernate.type.NumericBooleanConverter.class)
     // для автоматической конвертации числа в true/false
     private Boolean activatied;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
-    @Column(name = "uuid", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "UUID", nullable = false, length = Integer.MAX_VALUE)
     private String uuid;
 
     @Override

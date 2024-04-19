@@ -20,21 +20,22 @@ import java.util.Objects;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category {
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "completed_count", updatable = false)
+    @Column(name = "COMPLETED_COUNT", updatable = false)
     private Long completedCount;
 
-    @Column(name = "uncompleted_count", updatable = false)
+    @Column(name = "UNCOMPLETED_COUNT", updatable = false)
     private Long uncompletedCount;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
     @Override

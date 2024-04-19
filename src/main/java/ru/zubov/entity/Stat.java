@@ -21,20 +21,20 @@ import java.util.Objects;
 public class Stat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "completed_total", updatable = false)
+    @Column(name = "COMPLETED_TOTAL", updatable = false)
     private Long completedTotal;
 
 
-    @Column(name = "uncompleted_total", updatable = false)
+    @Column(name = "UNCOMPLETED_TOTAL", updatable = false)
     private Long uncompletedTotal;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @MapsId     //используется для ленивой загрузки для связи @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     private User user;
 
     @Override
